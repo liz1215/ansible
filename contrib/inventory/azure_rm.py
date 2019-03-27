@@ -658,11 +658,11 @@ class AzureInventory(object):
                     virtual_machines = self._compute_client.virtual_machines.list(resource_group.lower())
                 except Exception as exc:
                     sys.exit("Error: fetching virtual machines for resource group {0} - {1}".format(resource_group, str(exc)))
-                if self._args.host or self.tags:
-                    selected_machines = self._selected_machines(virtual_machines)
-                    self._load_machines(selected_machines)
-                else:
-                    self._load_machines(virtual_machines)
+            if self._args.host or self.tags:
+                selected_machines = self._selected_machines(virtual_machines)
+                self._load_machines(selected_machines)
+            else:
+                self._load_machines(virtual_machines)
         else:
             # get all VMs within the subscription
             try:
